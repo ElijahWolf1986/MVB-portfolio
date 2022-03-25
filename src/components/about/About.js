@@ -2,10 +2,7 @@ import React from "react";
 import styles from "./About.module.css";
 import avatar from "../../images/basova.jpg";
 
-const Header = () => {
-  const articles = document.getElementById("articles");
-  const designs = document.getElementById("designs");
-
+const About = () => {
   return (
     <section className={styles.about}>
       <img className={styles.about_img} src={avatar} alt="author avatar" />
@@ -24,4 +21,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default About;
