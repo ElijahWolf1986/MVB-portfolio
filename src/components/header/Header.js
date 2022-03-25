@@ -1,11 +1,14 @@
 import React from "react";
 import styles from "./Header.module.css";
-// import logoCompany from "../../images/vega_blue.png";
-// import { Link } from "react-router-dom";
 
 const Header = () => {
-  const articles = document.getElementById("articles");
-  const designs = document.getElementById("designs");
+  const [articles, setArticles] = React.useState([]);
+  const [designs, setDesigns] = React.useState([]);
+
+  React.useEffect(() => {
+    setArticles(document.getElementById("articles"));
+    setDesigns(document.getElementById("designs"));
+  }, []);
 
   return (
     <div>
@@ -14,15 +17,14 @@ const Header = () => {
           <div className={styles.header_author}>
             <div className={styles.header_author_name}>
               {" "}
-              {/* <div className={styles.header_author_logo}>logo</div> */}
               <h1 className={styles.header_author_title}> Maria Basova</h1>
             </div>
-            <p className={styles.header_author_paragraph}>
+            <div className={styles.header_author_paragraph}>
               {" "}
               <p className={styles.header_author_item}>mv.basova@gmail.com </p>
               <p className={styles.header_author_item}>|</p>
               <p className={styles.header_author_item}>+79654809881</p>{" "}
-            </p>
+            </div>
           </div>
           <menu className={styles.header_menu}>
             <ul className={styles.header_menu_list}>
@@ -57,16 +59,6 @@ const Header = () => {
         </div>
         <h2 className={styles.header_title}>Copywriting|Marketing|Design</h2>
       </section>
-
-      {/* <section id="articles" className={styles.articles}>
-        <p>Статьи</p>
-      </section>
-      <section id="designs" className={styles.articles}>
-        Дизайн
-      </section>
-      <section id="footer" className={styles.articles}>
-        футер
-      </section> */}
     </div>
   );
 };

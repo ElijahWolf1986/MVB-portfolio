@@ -1,12 +1,13 @@
-.articles {
+.designs {
   display: flex;
   flex-direction: column;
-  margin: 0;
+  /* margin: auto; */
   padding: 20px;
-  background-color: #ebebeb;
+  background-color: #f5f8f8;
+  /* border: 1px solid black; */
 }
 
-.articles_title {
+.designs_title {
   font-family: inherit;
   font-style: normal;
   font-weight: 400;
@@ -14,8 +15,9 @@
   line-height: 46px;
 }
 
-.articles_list {
+.designs_list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
+  /* border: 1px solid black; */
 }

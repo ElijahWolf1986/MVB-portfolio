@@ -1,0 +1,45 @@
+.article_item {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  max-width: 420px;
+  max-height: 320px;
+  border: none;
+  border-radius: 16px;
+  margin: 20px;
+}
+
+.article_overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  background-color: black;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.article_overlay:hover {
+  opacity: 0.6;
+}
+
+.article_paragraph {
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 46px;
+  color: white;
+}
+.article_img {
+  width: 100%;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+.article_link {
+  text-decoration: none;
+  color: aliceblue;
+}

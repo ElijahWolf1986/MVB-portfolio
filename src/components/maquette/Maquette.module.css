@@ -1,0 +1,16 @@
+.maquette_item {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  max-width: 23%;
+  max-height: 300px;
+  border: none;
+  border-radius: 16px;
+  margin: 1%;
+}
+
+.maquette_img {
+  width: 100%;
+  border-radius: 16px;
+  object-fit: cover;
+}
