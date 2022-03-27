@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Article1",
+    "title": "Неочевидные ошибки дизайнера.",
+    "img": "https://i.postimg.cc/tTRvG1K5/text-img1.jpg",
+    "articlelink": "https://drive.google.com/file/d/1ReVAkCZezXlIz6LD4MR_NIFcMEMzzN8K/view"
+  },
+  {
+    "name": "Article2",
+    "title": "Обзор медиарынка во время кризиса.",
+    "img": "https://i.postimg.cc/bv9V50Br/text-img2.jpg",
+    "articlelink": "https://drive.google.com/file/d/1XrJ1pVg6hkK-3ZsxQPKI9LbBk07S9eg1/view"
+  },
+  {
+    "name": "Article3",
+    "title": "Путешествие в путешествии. ",
+    "img": "https://i.postimg.cc/m2PqrHtp/text-img3.jpg",
+    "articlelink": "https://drive.google.com/file/d/1YVdI1kI_6KA0FwbyV2UKTc5SbOUdhKUO/view"
+  },
+  {
+    "name": "Article4",
+    "title": "5 шагов на пути к хорошему отдыху.",
+    "img": "https://i.postimg.cc/gcSQdDk6/text-img4.jpg",
+    "articlelink": "https://drive.google.com/file/d/1XrJ1pVg6hkK-3ZsxQPKI9LbBk07S9eg1/view"
+  },
+  {
+    "name": "Article5",
+    "title": "Интервью с владельцем медиахолдинга",
+    "img": "https://i.postimg.cc/8c00H1nb/text-img5.jpg",
+    "articlelink": "https://drive.google.com/file/d/1XrJ1pVg6hkK-3ZsxQPKI9LbBk07S9eg1/view"
+  },
+  {
+    "name": "Article6",
+    "title": "Сочи - лучший город для отдыха. ",
+    "img": "https://i.postimg.cc/wjJGXY5h/text-img6.jpg",
+    "articlelink": "https://drive.google.com/file/d/1XrJ1pVg6hkK-3ZsxQPKI9LbBk07S9eg1/view"
+  },
+  {
+    "name": "Article7",
+    "title": "Современные критерии поиска работы.",
+    "img": "https://i.postimg.cc/pX3S5LjW/text-img7.jpg",
+    "articlelink": "https://drive.google.com/file/d/1XrJ1pVg6hkK-3ZsxQPKI9LbBk07S9eg1/view"
+  },
+  {
+    "name": "Article8",
+    "title": "Тексты для видеокурса о расслаблении.",
+    "img": "https://i.postimg.cc/25DXT9Tg/text-img8.jpg",
+    "articlelink": "https://drive.google.com/file/d/1XrJ1pVg6hkK-3ZsxQPKI9LbBk07S9eg1/view"
+  },
+  {
+    "name": "Article9",
+    "title": "Обзор медиарынка во время кризиса.",
+    "img": "https://i.postimg.cc/1XFywYv4/text-img9.png",
+    "article-link": "https://drive.google.com/file/d/1XrJ1pVg6hkK-3ZsxQPKI9LbBk07S9eg1/view"
+  }
+]

@@ -1,0 +1,22 @@
+.designs {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #f5f8f8;
+}
+
+.designs_title {
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 46px;
+  display: flex;
+  justify-content: center;
+}
+
+.designs_list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}

@@ -1,0 +1,48 @@
+.maquette_item {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  max-width: 23%;
+  max-height: 300px;
+  border: none;
+  border-radius: 16px;
+  margin: 1%;
+}
+
+.maquette_item:hover {
+  /* box-shadow: inset 5px 5px 5px rgba(221, 6, 6, 0.87); */
+  opacity: 0.9;
+}
+
+.maquette_img {
+  width: 100%;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+.maquette_edit {
+  /* border: 1px solid black; */
+  position: absolute;
+  /* width: 120px; */
+  top: 15px;
+  right: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.maquette_buttonDelete {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  background: none;
+  background-image: url("../../images/trash_black_hover.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: none;
+  padding: 0;
+}
+
+.maquette_buttonDelete:hover {
+  background-image: url("../../images/trash_red_hover.svg");
+}
