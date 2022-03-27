@@ -4,7 +4,7 @@ import Maquette from "../maquette/Maquette";
 import makets from "../../services/makets.json";
 import AddButton from "../addButton/AddButton";
 
-const Designs = ({ isLoggedIn }) => {
+const Designs = ({ isLoggedIn, onViewMaquette }) => {
   return (
     <section id="designs" className={styles.designs}>
       <h1 className={styles.designs_title}>
@@ -17,7 +17,12 @@ const Designs = ({ isLoggedIn }) => {
         ) : (
           makets.map((item) => {
             return (
-              <Maquette data={item} key={item.name} isLoggedIn={isLoggedIn} />
+              <Maquette
+                data={item}
+                key={item.name}
+                isLoggedIn={isLoggedIn}
+                onViewMaquette={onViewMaquette}
+              />
             );
           })
         )}

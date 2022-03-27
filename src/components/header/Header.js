@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Header.module.css";
 
-const Header = ({ isLoggedIn, userInfo }) => {
+const Header = ({ isLoggedIn, userInfo, openLoginForm, onLogout }) => {
   const [articles, setArticles] = React.useState([]);
   const [designs, setDesigns] = React.useState([]);
   const { name } = userInfo;
@@ -16,9 +16,14 @@ const Header = ({ isLoggedIn, userInfo }) => {
       <section className={styles.header_section}>
         <div className={styles.header_login}>
           {!isLoggedIn ? (
-            <button className={styles.header_login_button}>войти</button>
+            <button
+              className={styles.header_login_button}
+              onClick={openLoginForm}
+            >
+              войти
+            </button>
           ) : (
-            <button className={styles.header_logout_button}>
+            <button className={styles.header_logout_button} onClick={onLogout}>
               {name}, выйти
             </button>
           )}
