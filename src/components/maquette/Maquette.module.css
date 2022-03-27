@@ -9,6 +9,11 @@
   margin: 1%;
 }
 
+.maquette_item:hover {
+  /* box-shadow: inset 5px 5px 5px rgba(221, 6, 6, 0.87); */
+  opacity: 0.9;
+}
+
 .maquette_img {
   width: 100%;
   border-radius: 16px;
@@ -35,7 +40,6 @@
   background-size: cover;
   background-repeat: no-repeat;
   border: none;
-
   padding: 0;
 }
 
