@@ -2,7 +2,7 @@
   position: relative;
   cursor: pointer;
   display: flex;
-  max-width: 420px;
+  max-width: 30%;
   max-height: 320px;
   border: none;
   border-radius: 16px;
@@ -19,6 +19,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1;
 }
 
 .article_overlay:hover {
@@ -42,4 +43,52 @@
 .article_link {
   text-decoration: none;
   color: aliceblue;
+  z-index: 0;
+}
+
+.article_edit {
+  /* border: 1px solid black; */
+  position: absolute;
+  /* width: 120px; */
+  top: 15px;
+  right: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.article_buttonEdit {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  background: none;
+  background-image: url("../../images/edit_button_white.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: none;
+  padding: 0;
+  margin: 0 10px 0 0;
+}
+
+.article_buttonEdit:hover {
+  background-image: url("../../images/edit_button_red.svg");
+}
+
+.article_buttonDelete {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  background: none;
+  background-image: url("../../images/trash_black_hover.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: none;
+
+  padding: 0;
+  z-index: 5;
+}
+
+.article_buttonDelete:hover {
+  background-image: url("../../images/trash_red_hover.svg");
+  z-index: 5;
 }

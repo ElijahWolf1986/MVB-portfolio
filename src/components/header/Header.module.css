@@ -104,3 +104,36 @@
 .header_menu_item:hover {
   color: red;
 }
+
+.header_login {
+  max-width: 200px;
+  align-self: flex-end;
+  margin: 0 30px 0 0;
+  /* border: 1px solid black; */
+}
+
+.header_login_button {
+  border-radius: 16px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  height: 40px;
+}
+
+.header_login_button:hover {
+  background-color: azure;
+  color: red;
+}
+
+.header_logout_button {
+  border-radius: 16px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  height: 40px;
+}
+
+.header_logout_button:hover {
+  background-color: azure;
+  color: red;
+}

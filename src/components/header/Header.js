@@ -1,9 +1,10 @@
 import React from "react";
 import styles from "./Header.module.css";
 
-const Header = () => {
+const Header = ({ isLoggedIn, userInfo }) => {
   const [articles, setArticles] = React.useState([]);
   const [designs, setDesigns] = React.useState([]);
+  const { name } = userInfo;
 
   React.useEffect(() => {
     setArticles(document.getElementById("articles"));
@@ -13,6 +14,15 @@ const Header = () => {
   return (
     <div>
       <section className={styles.header_section}>
+        <div className={styles.header_login}>
+          {!isLoggedIn ? (
+            <button className={styles.header_login_button}>войти</button>
+          ) : (
+            <button className={styles.header_logout_button}>
+              {name}, выйти
+            </button>
+          )}
+        </div>
         <div className={styles.header_author_info}>
           <div className={styles.header_author}>
             <div className={styles.header_author_name}>

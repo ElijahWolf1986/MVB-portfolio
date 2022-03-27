@@ -12,6 +12,8 @@
   font-weight: 400;
   font-size: 36px;
   line-height: 46px;
+  display: flex;
+  justify-content: center;
 }
 
 .articles_list {

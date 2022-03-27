@@ -1,20 +1,26 @@
 import React from "react";
 import styles from "./About.module.css";
-import avatar from "../../images/basova.jpg";
 
-const About = () => {
+const About = ({ user, isLoggedIn }) => {
+  const { image, title, about1, about2 } = user;
   return (
     <section className={styles.about}>
-      <img className={styles.about_img} src={avatar} alt="author avatar" />
+      {isLoggedIn && (
+        <div className={styles.about_edit}>
+          <button className={styles.about_buttonEdit}></button>
+        </div>
+      )}
+      <img className={styles.about_img} src={image} alt="author avatar" />
       <div className={styles.about_info}>
-        <h1 className={styles.about_title}> Об авторе </h1>
+        <h1 className={styles.about_title}>
+          {" "}
+          {title ? title : "Введите заголовок"}{" "}
+        </h1>
         <p className={styles.about_paragraph}>
-          Это блок с описанием автора проекта. Здесь следует указать, как вас
-          зовут, чем вы занимаетесь, какими технологиями разработки владеете.
+          {about1 ? about1 : "Заполните поле"}
         </p>
         <p className={styles.about_paragraph}>
-          Также можно рассказать о процессе обучения в Практикуме, чему вы тут
-          научились, и чем можете помочь потенциальным заказчикам.
+          {about2 ? about2 : "Заполните поле"}
         </p>
       </div>
     </section>
