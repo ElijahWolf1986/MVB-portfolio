@@ -10,6 +10,7 @@ import PopupImgView from "./popupImgView/PopupImgView";
 import EditAbout from "./editAbout/EditAbout";
 import EditArticle from "./editArticle/EditArticle";
 import AddArticle from "./addArticle/AddArticle";
+import AddMaquette from "./addMaquette/AddMaquette";
 import user from "../services/user.json";
 
 function App() {
@@ -19,6 +20,8 @@ function App() {
   const [isPopupOpenEditArticle, setIsPopupOpenEditArticle] =
     React.useState(false);
   const [isPopupOpenAddArcticle, setIsPopupOpenAddArcticle] =
+    React.useState(false);
+  const [isPopupOpenAddMaquette, setIsPopupOpenAddMaquette] =
     React.useState(false);
 
   const [isPopupOpenView, setIsPopupOpenView] = React.useState(false);
@@ -37,6 +40,7 @@ function App() {
     setIsPopupOpenEditAbout(false);
     setIsPopupOpenEditArticle(false);
     setIsPopupOpenAddArcticle(false);
+    setIsPopupOpenAddMaquette(false);
     setIsResetForm(true);
     setErrorServerMessage("");
     setMaquette("");
@@ -55,6 +59,10 @@ function App() {
 
   const openAddArticle = () => {
     setIsPopupOpenAddArcticle(true);
+  };
+
+  const openAddMaquette = () => {
+    setIsPopupOpenAddMaquette(true);
   };
 
   const openEditArticle = (article) => {
@@ -97,6 +105,10 @@ function App() {
     console.log("добавили статью");
   };
 
+  const handleAddMaquette = (name, image) => {
+    console.log("добавили макет");
+  };
+
   const handleEditArticle = (name, image, title, link) => {};
 
   const handleDeleteArticle = (article) => {
@@ -109,6 +121,11 @@ function App() {
     setMaquette(maquette);
     // console.log(maquette);
     setIsPopupOpenView(true);
+  };
+
+  const handleDeleteMaquette = (maquette) => {
+    console.log("удаляем макет", maquette);
+    // console.log(maquette);
   };
 
   React.useEffect(() => {
@@ -135,7 +152,12 @@ function App() {
         deleteArticle={handleDeleteArticle}
         openAddArticle={openAddArticle}
       />
-      <Designs isLoggedIn={isLoggedIn} onViewMaquette={onViewMaquette} />
+      <Designs
+        isLoggedIn={isLoggedIn}
+        onViewMaquette={onViewMaquette}
+        onDeleteMaquette={handleDeleteMaquette}
+        openAddMaquette={openAddMaquette}
+      />
       <Footer />
       <Login
         isPopupOpen={isPopupOpenLogin}
@@ -165,6 +187,13 @@ function App() {
         onClose={closePopup}
         // article={article}
         onAddArticle={handleAddArticle}
+        onServerErrorMessage={errorServerMessage}
+      />
+
+      <AddMaquette
+        isPopupOpen={isPopupOpenAddMaquette}
+        onClose={closePopup}
+        onAddMaquette={handleAddMaquette}
         onServerErrorMessage={errorServerMessage}
       />
       <PopupImgView
