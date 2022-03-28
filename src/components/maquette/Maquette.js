@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./Maquette.module.css";
-import Popup from "../Popup/Popup";
 
 const Maquette = ({ data, isLoggedIn, onViewMaquette }) => {
   const { img, name } = data;

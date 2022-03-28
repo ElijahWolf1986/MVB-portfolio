@@ -4,7 +4,7 @@ import Article from "../article/Article";
 import data from "../../services/data.json";
 import AddButton from "../addButton/AddButton";
 
-const Articles = ({ isLoggedIn }) => {
+const Articles = ({ isLoggedIn, openEditArticle }) => {
   return (
     <section id="articles" className={styles.articles}>
       <h1 className={styles.articles_title}>
@@ -17,7 +17,12 @@ const Articles = ({ isLoggedIn }) => {
         ) : (
           data.map((item) => {
             return (
-              <Article data={item} key={item.name} isLoggedIn={isLoggedIn} />
+              <Article
+                data={item}
+                key={item.name}
+                isLoggedIn={isLoggedIn}
+                openEditArticle={openEditArticle}
+              />
             );
           })
         )}
