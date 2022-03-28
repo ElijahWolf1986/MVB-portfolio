@@ -23,6 +23,7 @@ const EditArticle = ({
       setErrMessage("Ссылка неверна");
     } else {
       onEditArticle(image, name, title, link);
+      onClose();
       return;
     }
   };
@@ -112,7 +113,7 @@ const EditArticle = ({
           <input
             type="text"
             value={link || ""}
-            onChange={handleChangeTitle}
+            onChange={handleChangeLink}
             name="link"
             required
             placeholder="Введите ссылку"

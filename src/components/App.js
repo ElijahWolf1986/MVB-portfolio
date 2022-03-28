@@ -9,6 +9,7 @@ import Login from "./login/Login";
 import PopupImgView from "./popupImgView/PopupImgView";
 import EditAbout from "./editAbout/EditAbout";
 import EditArticle from "./editArticle/EditArticle";
+import AddArticle from "./addArticle/AddArticle";
 import user from "../services/user.json";
 
 function App() {
@@ -16,6 +17,8 @@ function App() {
   const [isPopupOpenLogin, setIsPopupOpenLogin] = React.useState(false);
   const [isPopupOpenEditAbout, setIsPopupOpenEditAbout] = React.useState(false);
   const [isPopupOpenEditArticle, setIsPopupOpenEditArticle] =
+    React.useState(false);
+  const [isPopupOpenAddArcticle, setIsPopupOpenAddArcticle] =
     React.useState(false);
 
   const [isPopupOpenView, setIsPopupOpenView] = React.useState(false);
@@ -33,6 +36,7 @@ function App() {
     setIsPopupOpenLogin(false);
     setIsPopupOpenEditAbout(false);
     setIsPopupOpenEditArticle(false);
+    setIsPopupOpenAddArcticle(false);
     setIsResetForm(true);
     setErrorServerMessage("");
     setMaquette("");
@@ -47,6 +51,15 @@ function App() {
 
   const openEditAbout = () => {
     setIsPopupOpenEditAbout(true);
+  };
+
+  const openAddArticle = () => {
+    setIsPopupOpenAddArcticle(true);
+  };
+
+  const openEditArticle = (article) => {
+    setArticle(article);
+    setIsPopupOpenEditArticle(true);
   };
 
   const onLogin = (email, password) => {
@@ -80,11 +93,15 @@ function App() {
     //функция по редактированию блока about
   };
 
+  const handleAddArticle = (name, image, title, link) => {
+    console.log("добавили статью");
+  };
+
   const handleEditArticle = (name, image, title, link) => {};
 
-  const openEditArticle = (article) => {
-    setArticle(article);
-    setIsPopupOpenEditArticle(true);
+  const handleDeleteArticle = (article) => {
+    console.log("прикончим эту статью)");
+    console.log(article);
   };
 
   const onViewMaquette = (maquette) => {
@@ -112,7 +129,12 @@ function App() {
         isLoggedIn={isLoggedIn}
         openEditAbout={openEditAbout}
       />
-      <Articles isLoggedIn={isLoggedIn} openEditArticle={openEditArticle} />
+      <Articles
+        isLoggedIn={isLoggedIn}
+        openEditArticle={openEditArticle}
+        deleteArticle={handleDeleteArticle}
+        openAddArticle={openAddArticle}
+      />
       <Designs isLoggedIn={isLoggedIn} onViewMaquette={onViewMaquette} />
       <Footer />
       <Login
@@ -135,6 +157,14 @@ function App() {
         onClose={closePopup}
         article={article}
         onEditArticle={handleEditArticle}
+        onServerErrorMessage={errorServerMessage}
+      />
+
+      <AddArticle
+        isPopupOpen={isPopupOpenAddArcticle}
+        onClose={closePopup}
+        // article={article}
+        onAddArticle={handleAddArticle}
         onServerErrorMessage={errorServerMessage}
       />
       <PopupImgView

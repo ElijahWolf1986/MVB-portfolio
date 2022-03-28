@@ -1,71 +1,76 @@
 import React from "react";
-import styles from "./EditAbout.module.css";
+import styles from "./AddArticle.module.css";
 import Popup from "../Popup/Popup";
 import { handleValidationLink } from "../../utils/ValidationForm";
 
-const EditAbout = ({
+const AddArticle = ({
   isPopupOpen,
   onClose,
-  onAbout,
-  aboutInfo,
+  onAddArticle,
+  //   article,
   onServerErrorMessage,
 }) => {
   const [image, setImage] = React.useState("");
+  const [name, setName] = React.useState("");
   const [title, setTitle] = React.useState("");
-  const [about1, setAbout1] = React.useState("");
-  const [about2, setAbout2] = React.useState("");
+  const [link, setLink] = React.useState("");
   const [errMessage, setErrMessage] = React.useState("");
   const [isButtonSaveDisabled, setButtonSaveDisabled] = React.useState(true);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    if (!handleValidationLink(image)) {
+    if (!handleValidationLink(image) || !handleValidationLink(link)) {
       setErrMessage("Ссылка неверна");
     } else {
-      onAbout(image, title, about1, about2);
+      onAddArticle(image, name, title, link);
+      formReset();
       onClose();
       return;
     }
   };
 
-  const handleChangeAvatar = (evt) => {
+  const formReset = () => {
+    setName("");
+    setTitle("");
+    setLink("");
+    setImage("");
+    setErrMessage("");
+  };
+
+  const handleChangeImage = (evt) => {
     setImage(evt.target.value);
     setErrMessage("");
   };
 
+  const handleChangeName = (evt) => {
+    setName(evt.target.value);
+    setErrMessage("");
+  };
   const handleChangeTitle = (evt) => {
     setTitle(evt.target.value);
     setErrMessage("");
   };
-  const handleChangeAbout1 = (evt) => {
-    setAbout1(evt.target.value);
-    setErrMessage("");
-  };
-  const handleChangeAbout2 = (evt) => {
-    setAbout2(evt.target.value);
+  const handleChangeLink = (evt) => {
+    setLink(evt.target.value);
     setErrMessage("");
   };
 
   React.useEffect(() => {
     //устанавливает кнопку сохранить в нужную кондицию при изменении полей ввода
-    if (image && title && about1 && about2) {
+    if (image && title && link && name) {
       setButtonSaveDisabled(false);
     } else {
       setButtonSaveDisabled(true);
     }
   }, [
-    handleChangeAvatar,
+    handleChangeImage,
+    handleChangeName,
     handleChangeTitle,
-    handleChangeAbout1,
-    handleChangeAbout2,
+    handleChangeLink,
   ]);
 
   React.useEffect(() => {
-    setImage(aboutInfo.image);
-    setTitle(aboutInfo.title);
-    setAbout1(aboutInfo.about1);
-    setAbout2(aboutInfo.about2);
-    setErrMessage("");
+    formReset();
   }, [isPopupOpen]);
 
   return (
@@ -77,14 +82,14 @@ const EditAbout = ({
         noValidate
       >
         <fieldset className={styles.popup__form_auth}>
-          <label className={styles.popup__label}>Аватарка</label>
+          <label className={styles.popup__label}>Имя статьи</label>
           <input
             type="text"
-            value={image || ""}
-            onChange={handleChangeAvatar}
-            name="avatar"
-            // required
-            placeholder="Введите ссылку на фотографию"
+            value={name || ""}
+            onChange={handleChangeName}
+            name="name"
+            required
+            placeholder="Введите название статьи"
             className={styles.popup__input}
           />
           <label className={styles.popup__label}>Заголовок</label>
@@ -93,30 +98,30 @@ const EditAbout = ({
             value={title || ""}
             onChange={handleChangeTitle}
             name="title"
-            // required
+            required
             placeholder="Введите заголовок"
             className={styles.popup__input}
           />
-          <label className={styles.popup__label}>Описание</label>
-          <textarea
+          <label className={styles.popup__label}>
+            Ссылка на обложку статьи
+          </label>
+          <input
             type="text"
-            rows="3"
-            value={about1 || ""}
-            onChange={handleChangeAbout1}
-            name="about1"
-            // required
-            placeholder="Введите описание"
+            value={image || ""}
+            onChange={handleChangeImage}
+            name="image"
+            required
+            placeholder="Введите ссылку"
             className={styles.popup__input}
           />
-          <label className={styles.popup__label}>Заключение</label>
-          <textarea
-            rows="3"
+          <label className={styles.popup__label}>Ссылка на статью</label>
+          <input
             type="text"
-            value={about2 || ""}
-            onChange={handleChangeAbout2}
-            name="about2"
-            // required
-            placeholder="Введите заключение"
+            value={link || ""}
+            onChange={handleChangeLink}
+            name="link"
+            required
+            placeholder="Введите ссылку"
             className={styles.popup__input}
           />
           <span className={styles.popup__error_visible}>{errMessage}</span>
@@ -131,11 +136,11 @@ const EditAbout = ({
           }`}
           disabled={isButtonSaveDisabled}
         >
-          Изменить данные
+          Добавить статью
         </button>
       </form>
     </Popup>
   );
 };
 
-export default EditAbout;
+export default AddArticle;

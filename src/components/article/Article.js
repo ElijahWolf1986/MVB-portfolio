@@ -1,10 +1,13 @@
 import React from "react";
 import styles from "./Article.module.css";
 
-const Article = ({ data, isLoggedIn, openEditArticle }) => {
+const Article = ({ data, isLoggedIn, openEditArticle, deleteArticle }) => {
   const { articlelink, title, img } = data;
   const handleViewArticleInfo = () => {
     openEditArticle(data);
+  };
+  const handleDeletArticle = () => {
+    deleteArticle(data);
   };
   return (
     <div className={styles.article_item}>
@@ -14,7 +17,10 @@ const Article = ({ data, isLoggedIn, openEditArticle }) => {
             className={styles.article_buttonEdit}
             onClick={handleViewArticleInfo}
           ></button>
-          <button className={styles.article_buttonDelete}></button>
+          <button
+            className={styles.article_buttonDelete}
+            onClick={handleDeletArticle}
+          ></button>
         </div>
       )}
 
