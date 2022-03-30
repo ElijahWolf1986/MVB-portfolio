@@ -61,6 +61,38 @@ export const getUserInfo = (token) => {
     .then((data) => data);
 };
 
+export const getAboutInfo = (token) => {
+  return fetch(`${BASE_URL}/mvbabout`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => data);
+};
+
+export const editAboutInfo = (token, title, about1, about2, image) => {
+  return fetch(`${BASE_URL}/mvbabout`, {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      token,
+      title,
+      about1,
+      about2,
+      image,
+    }),
+  })
+    .then((res) => res.json())
+    .then((data) => data);
+};
 // export const getArticles = (token) => {
 //   return fetch(`${BASE_URL}/articles`, {
 //     method: "GET",

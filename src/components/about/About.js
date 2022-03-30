@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./About.module.css";
 
-const About = ({ user, isLoggedIn, openEditAbout }) => {
-  const { image, title, about1, about2 } = user;
+const About = ({ about, isLoggedIn, openEditAbout }) => {
+  const { image, title, about1, about2 } = about;
   return (
     <section className={styles.about}>
       {isLoggedIn && (

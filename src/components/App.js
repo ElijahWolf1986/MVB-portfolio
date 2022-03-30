@@ -12,7 +12,7 @@ import EditAbout from "./editAbout/EditAbout";
 import EditArticle from "./editArticle/EditArticle";
 import AddArticle from "./addArticle/AddArticle";
 import AddMaquette from "./addMaquette/AddMaquette";
-import user from "../services/user.json";
+import aboutDefault from "../services/about.json";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
@@ -31,6 +31,7 @@ function App() {
   const [errorServerMessage, setErrorServerMessage] = React.useState("");
 
   const [userInfo, setUserInfo] = React.useState("");
+  const [aboutInfo, setAboutInfo] = React.useState("");
 
   const [maquette, setMaquette] = React.useState("");
   const [article, setArticle] = React.useState("");
@@ -99,6 +100,33 @@ function App() {
     }
   };
 
+  const getAboutInfo = () => {
+    let jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      MainApi.getAboutInfo(jwt)
+        .then((res) => {
+          setAboutInfo(res.data[0]);
+        })
+        .catch((err) => {
+          setUserInfo(aboutDefault);
+        });
+    }
+  };
+
+  // const editAboutInfo = () => {
+  //   let jwt = localStorage.getItem("jwt");
+  //   if (jwt) {
+  //     MainApi.getAboutInfo(jwt)
+  //       .then((res) => {
+  //         setAboutInfo(res);
+  //         console.log(res.data);
+  //       })
+  //       .catch((err) => {
+  //         setUserInfo(aboutDefault);
+  //       });
+  //   }
+  // };
+
   const onLogin = (email, password) => {
     MainApi.authorize(email, password)
       .then((data) => {
@@ -122,7 +150,10 @@ function App() {
   };
 
   const handleAbout = (image, title, about1, about2) => {
-    //функция по редактированию блока about
+    let jwt = localStorage.getItem("jwt");
+    return MainApi.editAboutInfo(jwt, title, about1, about2, image).catch(
+      (err) => console.log(err.message)
+    );
   };
 
   const handleAddArticle = (name, image, title, link) => {
@@ -154,8 +185,12 @@ function App() {
 
   React.useEffect(() => {
     tokenCheck();
-    // setUserInfo(user);
+    getAboutInfo();
   }, []);
+
+  React.useEffect(() => {
+    getAboutInfo();
+  }, [handleAbout]);
 
   // console.log(user);
   return (
@@ -167,7 +202,7 @@ function App() {
         onLogout={onLogout}
       />
       <About
-        user={userInfo}
+        about={aboutInfo}
         isLoggedIn={isLoggedIn}
         openEditAbout={openEditAbout}
       />
@@ -194,7 +229,7 @@ function App() {
       <EditAbout
         isPopupOpen={isPopupOpenEditAbout}
         onClose={closePopup}
-        aboutInfo={userInfo}
+        aboutInfo={aboutInfo}
         onAbout={handleAbout}
         onServerErrorMessage={errorServerMessage}
       />
