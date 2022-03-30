@@ -13,7 +13,7 @@ const Articles = ({
   return (
     <section id="articles" className={styles.articles}>
       <h1 className={styles.articles_title}>
-        Articles
+        Статьи
         {isLoggedIn && (
           <div className={styles.articles_add_button} onClick={openAddArticle}>
             <AddButton />{" "}

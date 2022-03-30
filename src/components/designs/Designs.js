@@ -13,7 +13,7 @@ const Designs = ({
   return (
     <section id="designs" className={styles.designs}>
       <h1 className={styles.designs_title}>
-        Designs
+        Дизайн
         {isLoggedIn && (
           <div onClick={openAddMaquette}>
             <AddButton />

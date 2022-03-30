@@ -4,7 +4,7 @@ import styles from "./Header.module.css";
 const Header = ({ isLoggedIn, userInfo, openLoginForm, onLogout }) => {
   const [articles, setArticles] = React.useState([]);
   const [designs, setDesigns] = React.useState([]);
-  const { name } = userInfo;
+  // const { name } = userInfo;
 
   React.useEffect(() => {
     setArticles(document.getElementById("articles"));
@@ -24,7 +24,7 @@ const Header = ({ isLoggedIn, userInfo, openLoginForm, onLogout }) => {
             </button>
           ) : (
             <button className={styles.header_logout_button} onClick={onLogout}>
-              {name}, выйти
+              {userInfo}, выйти
             </button>
           )}
         </div>
@@ -32,7 +32,7 @@ const Header = ({ isLoggedIn, userInfo, openLoginForm, onLogout }) => {
           <div className={styles.header_author}>
             <div className={styles.header_author_name}>
               {" "}
-              <h1 className={styles.header_author_title}> Maria Basova</h1>
+              <h1 className={styles.header_author_title}> Мария Басова</h1>
             </div>
             <div className={styles.header_author_paragraph}>
               {" "}
@@ -53,7 +53,7 @@ const Header = ({ isLoggedIn, userInfo, openLoginForm, onLogout }) => {
                     });
                 }}
               >
-                Articles
+                Статьи
               </li>
               <li className={styles.header_menu_item_special}> | </li>
               <li
@@ -67,7 +67,7 @@ const Header = ({ isLoggedIn, userInfo, openLoginForm, onLogout }) => {
                 }}
               >
                 {" "}
-                Designs
+                Дизайн
               </li>
             </ul>
           </menu>

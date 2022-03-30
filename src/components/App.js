@@ -1,5 +1,6 @@
 import "./App.css";
 import React from "react";
+import * as MainApi from "../utils/MainApi";
 import Header from "./header/Header";
 import About from "./about/About";
 import Articles from "./articles/Articles";
@@ -14,7 +15,7 @@ import AddMaquette from "./addMaquette/AddMaquette";
 import user from "../services/user.json";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isPopupOpenLogin, setIsPopupOpenLogin] = React.useState(false);
   const [isPopupOpenEditAbout, setIsPopupOpenEditAbout] = React.useState(false);
   const [isPopupOpenEditArticle, setIsPopupOpenEditArticle] =
@@ -46,7 +47,14 @@ function App() {
     setMaquette("");
   }
   const onLogout = () => {
+    localStorage.removeItem("jwt");
     setIsLoggedIn(false);
+    localStorage.loggedIn = isLoggedIn;
+    setUserInfo("");
+    localStorage.keyword = "";
+    localStorage.totalResult = 0;
+    localStorage.setItem("cards", JSON.stringify([]));
+    // history.push("/");
   };
 
   function openLoginForm() {
@@ -70,31 +78,47 @@ function App() {
     setIsPopupOpenEditArticle(true);
   };
 
+  const tokenCheck = () => {
+    //Проверка на наличие токена в локальном хранилище
+    let jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      setIsLoggedIn(true);
+      getUserInfo();
+    }
+  };
+  const getUserInfo = () => {
+    let jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      MainApi.getUserInfo(jwt)
+        .then((res) => {
+          setUserInfo(res.name);
+        })
+        .catch((err) => {
+          setUserInfo("NoName");
+        });
+    }
+  };
+
   const onLogin = (email, password) => {
-    //функция по отправке запроса на авторизацию
-    // const onLogin = (email, password) => {
-    //   ////тут обработака запроса авторизации
-    //   MainApi.authorize(email, password)
-    //     .then((data) => {
-    //       if (data) {
-    //         setLoggedIn(true);
-    //         closeAllPopups();
-    //         localStorage.loggedIn = loggedIn;
-    //         getUserInfo();
-    //         getUsersArticles();
-    //       }
-    //     })
-    //     .catch((err) => {
-    //       if (err.status === 401 || err.status === 403) {
-    //         setErrorServerMessage("Неверный логин или пароль");
-    //       } else {
-    //         setErrorServerMessage(err.statusText);
-    //       }
-    //       setTimeout(() => {
-    //         setErrorServerMessage("");
-    //       }, 2000);
-    //     });
-    // };
+    MainApi.authorize(email, password)
+      .then((data) => {
+        if (data) {
+          setIsLoggedIn(true);
+          closePopup();
+          localStorage.loggedIn = isLoggedIn;
+          getUserInfo();
+        }
+      })
+      .catch((err) => {
+        if (err.status === 401 || err.status === 403) {
+          setErrorServerMessage("Неверный логин или пароль");
+        } else {
+          setErrorServerMessage(err.statusText);
+        }
+        setTimeout(() => {
+          setErrorServerMessage("");
+        }, 2000);
+      });
   };
 
   const handleAbout = (image, title, about1, about2) => {
@@ -129,7 +153,8 @@ function App() {
   };
 
   React.useEffect(() => {
-    setUserInfo(user);
+    tokenCheck();
+    // setUserInfo(user);
   }, []);
 
   // console.log(user);
