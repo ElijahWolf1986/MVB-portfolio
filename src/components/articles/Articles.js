@@ -4,12 +4,21 @@ import Article from "../article/Article";
 import data from "../../services/data.json";
 import AddButton from "../addButton/AddButton";
 
-const Articles = ({ isLoggedIn }) => {
+const Articles = ({
+  isLoggedIn,
+  openEditArticle,
+  deleteArticle,
+  openAddArticle,
+}) => {
   return (
     <section id="articles" className={styles.articles}>
       <h1 className={styles.articles_title}>
         Articles
-        {isLoggedIn && <AddButton />}
+        {isLoggedIn && (
+          <div className={styles.articles_add_button} onClick={openAddArticle}>
+            <AddButton />{" "}
+          </div>
+        )}
       </h1>
       <div className={styles.articles_list}>
         {data.lenght === 0 ? (
@@ -17,7 +26,13 @@ const Articles = ({ isLoggedIn }) => {
         ) : (
           data.map((item) => {
             return (
-              <Article data={item} key={item.name} isLoggedIn={isLoggedIn} />
+              <Article
+                data={item}
+                key={item.name}
+                isLoggedIn={isLoggedIn}
+                openEditArticle={openEditArticle}
+                deleteArticle={deleteArticle}
+              />
             );
           })
         )}
