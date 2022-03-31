@@ -1,7 +1,7 @@
-import React from "react";
-import styles from "./AddArticle.module.css";
-import Popup from "../Popup/Popup";
-import { handleValidationLink } from "../../utils/ValidationForm";
+import React from 'react';
+import styles from './AddArticle.module.css';
+import Popup from '../Popup/Popup';
+import { handleValidationLink } from '../../utils/ValidationForm';
 
 const AddArticle = ({
   isPopupOpen,
@@ -10,19 +10,19 @@ const AddArticle = ({
   //   article,
   onServerErrorMessage,
 }) => {
-  const [image, setImage] = React.useState("");
-  const [name, setName] = React.useState("");
-  const [title, setTitle] = React.useState("");
-  const [link, setLink] = React.useState("");
-  const [errMessage, setErrMessage] = React.useState("");
+  const [image, setImage] = React.useState('');
+  const [name, setName] = React.useState('');
+  const [title, setTitle] = React.useState('');
+  const [link, setLink] = React.useState('');
+  const [errMessage, setErrMessage] = React.useState('');
   const [isButtonSaveDisabled, setButtonSaveDisabled] = React.useState(true);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     if (!handleValidationLink(image) || !handleValidationLink(link)) {
-      setErrMessage("Ссылка неверна");
+      setErrMessage('Ссылка неверна');
     } else {
-      onAddArticle(image, name, title, link);
+      onAddArticle(name, title, image, link);
       formReset();
       onClose();
       return;
@@ -30,29 +30,29 @@ const AddArticle = ({
   };
 
   const formReset = () => {
-    setName("");
-    setTitle("");
-    setLink("");
-    setImage("");
-    setErrMessage("");
+    setName('');
+    setTitle('');
+    setLink('');
+    setImage('');
+    setErrMessage('');
   };
 
   const handleChangeImage = (evt) => {
     setImage(evt.target.value);
-    setErrMessage("");
+    setErrMessage('');
   };
 
   const handleChangeName = (evt) => {
     setName(evt.target.value);
-    setErrMessage("");
+    setErrMessage('');
   };
   const handleChangeTitle = (evt) => {
     setTitle(evt.target.value);
-    setErrMessage("");
+    setErrMessage('');
   };
   const handleChangeLink = (evt) => {
     setLink(evt.target.value);
-    setErrMessage("");
+    setErrMessage('');
   };
 
   React.useEffect(() => {
@@ -77,51 +77,51 @@ const AddArticle = ({
     <Popup isPopupOpen={isPopupOpen} onClose={onClose} onSubmit={handleSubmit}>
       <form
         onSubmit={handleSubmit}
-        method="POST"
+        method='POST'
         className={styles.popup__form}
         noValidate
       >
         <fieldset className={styles.popup__form_auth}>
           <label className={styles.popup__label}>Имя статьи</label>
           <input
-            type="text"
-            value={name || ""}
+            type='text'
+            value={name || ''}
             onChange={handleChangeName}
-            name="name"
+            name='name'
             required
-            placeholder="Введите название статьи"
+            placeholder='Введите название статьи'
             className={styles.popup__input}
           />
           <label className={styles.popup__label}>Заголовок</label>
           <input
-            type="text"
-            value={title || ""}
+            type='text'
+            value={title || ''}
             onChange={handleChangeTitle}
-            name="title"
+            name='title'
             required
-            placeholder="Введите заголовок"
+            placeholder='Введите заголовок'
             className={styles.popup__input}
           />
           <label className={styles.popup__label}>
             Ссылка на обложку статьи
           </label>
           <input
-            type="text"
-            value={image || ""}
+            type='text'
+            value={image || ''}
             onChange={handleChangeImage}
-            name="image"
+            name='image'
             required
-            placeholder="Введите ссылку"
+            placeholder='Введите ссылку'
             className={styles.popup__input}
           />
           <label className={styles.popup__label}>Ссылка на статью</label>
           <input
-            type="text"
-            value={link || ""}
+            type='text'
+            value={link || ''}
             onChange={handleChangeLink}
-            name="link"
+            name='link'
             required
-            placeholder="Введите ссылку"
+            placeholder='Введите ссылку'
             className={styles.popup__input}
           />
           <span className={styles.popup__error_visible}>{errMessage}</span>
@@ -130,7 +130,7 @@ const AddArticle = ({
           {onServerErrorMessage}
         </span>
         <button
-          type="submit"
+          type='submit'
           className={`${styles.popup__button_save} ${
             isButtonSaveDisabled && styles.popup__button_save_disabled
           }`}

@@ -1,7 +1,7 @@
-import React from "react";
-import styles from "./AddMaquette.module.css";
-import Popup from "../Popup/Popup";
-import { handleValidationLink } from "../../utils/ValidationForm";
+import React from 'react';
+import styles from './AddMaquette.module.css';
+import Popup from '../Popup/Popup';
+import { handleValidationLink } from '../../utils/ValidationForm';
 
 const AddMaquette = ({
   isPopupOpen,
@@ -10,17 +10,17 @@ const AddMaquette = ({
   //   article,
   onServerErrorMessage,
 }) => {
-  const [image, setImage] = React.useState("");
-  const [name, setName] = React.useState("");
-  const [errMessage, setErrMessage] = React.useState("");
+  const [image, setImage] = React.useState('');
+  const [name, setName] = React.useState('');
+  const [errMessage, setErrMessage] = React.useState('');
   const [isButtonSaveDisabled, setButtonSaveDisabled] = React.useState(true);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     if (!handleValidationLink(image)) {
-      setErrMessage("Ссылка неверна");
+      setErrMessage('Ссылка неверна');
     } else {
-      onAddMaquette(image, name);
+      onAddMaquette(name, image);
       formReset();
       onClose();
       return;
@@ -28,19 +28,19 @@ const AddMaquette = ({
   };
 
   const formReset = () => {
-    setName("");
-    setImage("");
-    setErrMessage("");
+    setName('');
+    setImage('');
+    setErrMessage('');
   };
 
   const handleChangeImage = (evt) => {
     setImage(evt.target.value);
-    setErrMessage("");
+    setErrMessage('');
   };
 
   const handleChangeName = (evt) => {
     setName(evt.target.value);
-    setErrMessage("");
+    setErrMessage('');
   };
 
   React.useEffect(() => {
@@ -60,29 +60,29 @@ const AddMaquette = ({
     <Popup isPopupOpen={isPopupOpen} onClose={onClose} onSubmit={handleSubmit}>
       <form
         onSubmit={handleSubmit}
-        method="POST"
+        method='POST'
         className={styles.popup__form}
         noValidate
       >
         <fieldset className={styles.popup__form_auth}>
           <label className={styles.popup__label}>Имя макета</label>
           <input
-            type="text"
-            value={name || ""}
+            type='text'
+            value={name || ''}
             onChange={handleChangeName}
-            name="name"
+            name='name'
             required
-            placeholder="Введите название макета"
+            placeholder='Введите название макета'
             className={styles.popup__input}
           />
           <label className={styles.popup__label}>Ссылка на макет</label>
           <input
-            type="text"
-            value={image || ""}
+            type='text'
+            value={image || ''}
             onChange={handleChangeImage}
-            name="image"
+            name='image'
             required
-            placeholder="Введите ссылку"
+            placeholder='Введите ссылку'
             className={styles.popup__input}
           />
 
@@ -92,7 +92,7 @@ const AddMaquette = ({
           {onServerErrorMessage}
         </span>
         <button
-          type="submit"
+          type='submit'
           className={`${styles.popup__button_save} ${
             isButtonSaveDisabled && styles.popup__button_save_disabled
           }`}
