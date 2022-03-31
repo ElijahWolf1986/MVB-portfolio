@@ -1,8 +1,8 @@
-import React from "react";
-import styles from "./Article.module.css";
+import React from 'react';
+import styles from './Article.module.css';
 
 const Article = ({ data, isLoggedIn, openEditArticle, deleteArticle }) => {
-  const { articlelink, title, img } = data;
+  const { title, image, link } = data;
   const handleViewArticleInfo = () => {
     openEditArticle(data);
   };
@@ -24,12 +24,12 @@ const Article = ({ data, isLoggedIn, openEditArticle, deleteArticle }) => {
         </div>
       )}
 
-      <a target="new_blank" href={articlelink} className={styles.article_link}>
+      <a target='new_blank' href={link} className={styles.article_link}>
         <div className={styles.article_overlay}>
           <p className={styles.article_paragraph}>{title}</p>
         </div>
       </a>
-      <img className={styles.article_img} src={img} alt="article img" />
+      <img className={styles.article_img} src={image} alt='article img' />
     </div>
   );
 };

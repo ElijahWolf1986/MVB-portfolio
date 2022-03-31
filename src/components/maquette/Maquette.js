@@ -1,8 +1,8 @@
-import React from "react";
-import styles from "./Maquette.module.css";
+import React from 'react';
+import styles from './Maquette.module.css';
 
 const Maquette = ({ data, isLoggedIn, onViewMaquette, onDeleteMaquette }) => {
-  const { img, name } = data;
+  const { name, image } = data;
   const handleView = () => {
     onViewMaquette(data);
   };
@@ -21,7 +21,7 @@ const Maquette = ({ data, isLoggedIn, onViewMaquette, onDeleteMaquette }) => {
       )}
       <img
         className={styles.maquette_img}
-        src={img}
+        src={image}
         alt={name}
         onClick={handleView}
       />

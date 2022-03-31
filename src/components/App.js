@@ -1,18 +1,18 @@
-import "./App.css";
-import React from "react";
-import * as MainApi from "../utils/MainApi";
-import Header from "./header/Header";
-import About from "./about/About";
-import Articles from "./articles/Articles";
-import Designs from "./designs/Designs";
-import Footer from "./footer/Footer";
-import Login from "./login/Login";
-import PopupImgView from "./popupImgView/PopupImgView";
-import EditAbout from "./editAbout/EditAbout";
-import EditArticle from "./editArticle/EditArticle";
-import AddArticle from "./addArticle/AddArticle";
-import AddMaquette from "./addMaquette/AddMaquette";
-import aboutDefault from "../services/about.json";
+import './App.css';
+import React from 'react';
+import * as MainApi from '../utils/MainApi';
+import Header from './header/Header';
+import About from './about/About';
+import Articles from './articles/Articles';
+import Designs from './designs/Designs';
+import Footer from './footer/Footer';
+import Login from './login/Login';
+import PopupImgView from './popupImgView/PopupImgView';
+import EditAbout from './editAbout/EditAbout';
+import EditArticle from './editArticle/EditArticle';
+import AddArticle from './addArticle/AddArticle';
+import AddMaquette from './addMaquette/AddMaquette';
+import aboutDefault from '../services/about.json';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
@@ -24,19 +24,18 @@ function App() {
     React.useState(false);
   const [isPopupOpenAddMaquette, setIsPopupOpenAddMaquette] =
     React.useState(false);
-
   const [isPopupOpenView, setIsPopupOpenView] = React.useState(false);
-
   const [isResetForm, setIsResetForm] = React.useState(false);
-  const [errorServerMessage, setErrorServerMessage] = React.useState("");
+  const [errorServerMessage, setErrorServerMessage] = React.useState('');
+  const [userInfo, setUserInfo] = React.useState('');
+  const [aboutInfo, setAboutInfo] = React.useState('');
+  const [maquette, setMaquette] = React.useState('');
+  const [maquettes, setMaquettes] = React.useState('');
 
-  const [userInfo, setUserInfo] = React.useState("");
-  const [aboutInfo, setAboutInfo] = React.useState("");
+  const [article, setArticle] = React.useState('');
+  const [articles, setArticles] = React.useState('');
 
-  const [maquette, setMaquette] = React.useState("");
-  const [article, setArticle] = React.useState("");
-
-  function closePopup() {
+  const closePopup = () => {
     setIsPopupOpenView(false);
     setIsPopupOpenLogin(false);
     setIsPopupOpenEditAbout(false);
@@ -44,18 +43,17 @@ function App() {
     setIsPopupOpenAddArcticle(false);
     setIsPopupOpenAddMaquette(false);
     setIsResetForm(true);
-    setErrorServerMessage("");
-    setMaquette("");
-  }
+    setErrorServerMessage('');
+    setMaquette('');
+  };
   const onLogout = () => {
-    localStorage.removeItem("jwt");
+    localStorage.removeItem('jwt');
     setIsLoggedIn(false);
     localStorage.loggedIn = isLoggedIn;
-    setUserInfo("");
-    localStorage.keyword = "";
+    setUserInfo('');
+    localStorage.keyword = '';
     localStorage.totalResult = 0;
-    localStorage.setItem("cards", JSON.stringify([]));
-    // history.push("/");
+    localStorage.setItem('cards', JSON.stringify([]));
   };
 
   function openLoginForm() {
@@ -80,52 +78,54 @@ function App() {
   };
 
   const tokenCheck = () => {
-    //Проверка на наличие токена в локальном хранилище
-    let jwt = localStorage.getItem("jwt");
+    let jwt = localStorage.getItem('jwt');
     if (jwt) {
       setIsLoggedIn(true);
       getUserInfo();
     }
   };
   const getUserInfo = () => {
-    let jwt = localStorage.getItem("jwt");
+    let jwt = localStorage.getItem('jwt');
     if (jwt) {
       MainApi.getUserInfo(jwt)
         .then((res) => {
           setUserInfo(res.name);
         })
         .catch((err) => {
-          setUserInfo("NoName");
+          setUserInfo('NoName');
         });
     }
   };
 
   const getAboutInfo = () => {
-    let jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      MainApi.getAboutInfo(jwt)
-        .then((res) => {
-          setAboutInfo(res.data[0]);
-        })
-        .catch((err) => {
-          setUserInfo(aboutDefault);
-        });
-    }
+    MainApi.getAboutInfo()
+      .then((res) => {
+        setAboutInfo(res.data[0]);
+      })
+      .catch((err) => {
+        setUserInfo(aboutDefault);
+      });
   };
 
-  // const editAboutInfo = () => {
-  //   let jwt = localStorage.getItem("jwt");
-  //   if (jwt) {
-  //     MainApi.getAboutInfo(jwt)
-  //       .then((res) => {
-  //         setAboutInfo(res);
-  //         console.log(res.data);
-  //       })
-  //       .catch((err) => {
-  //         setUserInfo(aboutDefault);
-  //       });
-  //   }
-  // };
+  const getArticles = () => {
+    MainApi.getArticles()
+      .then((res) => {
+        setArticles(res.data);
+      })
+      .catch((err) => {
+        setArticles(undefined);
+      });
+  };
+
+  const getMaquettes = () => {
+    MainApi.getMaquette()
+      .then((res) => {
+        setMaquettes(res.data);
+      })
+      .catch((err) => {
+        setArticles(undefined);
+      });
+  };
 
   const onLogin = (email, password) => {
     MainApi.authorize(email, password)
@@ -139,62 +139,120 @@ function App() {
       })
       .catch((err) => {
         if (err.status === 401 || err.status === 403) {
-          setErrorServerMessage("Неверный логин или пароль");
+          setErrorServerMessage('Неверный логин или пароль');
         } else {
           setErrorServerMessage(err.statusText);
         }
         setTimeout(() => {
-          setErrorServerMessage("");
+          setErrorServerMessage('');
         }, 2000);
       });
   };
 
   const handleAbout = (image, title, about1, about2) => {
-    let jwt = localStorage.getItem("jwt");
-    return MainApi.editAboutInfo(jwt, title, about1, about2, image).catch(
-      (err) => console.log(err.message)
-    );
+    let jwt = localStorage.getItem('jwt');
+    MainApi.editAboutInfo(jwt, title, about1, about2, image)
+      .then((data) => {
+        if (data) {
+          closePopup();
+          getAboutInfo();
+        }
+      })
+      .catch((err) => {
+        if (err.status === 401 || err.status === 403) {
+          setErrorServerMessage('Неверный логин или пароль');
+        } else {
+          setErrorServerMessage(err.statusText);
+        }
+        setTimeout(() => {
+          setErrorServerMessage('');
+        }, 2000);
+      });
   };
 
-  const handleAddArticle = (name, image, title, link) => {
-    console.log("добавили статью");
+  const handleAddArticle = (name, title, image, link) => {
+    let jwt = localStorage.getItem('jwt');
+    MainApi.addArticle(jwt, name, title, image, link)
+      .then((data) => {
+        closePopup();
+        getArticles();
+      })
+      .catch((err) => {
+        if (err.status === 401 || err.status === 403) {
+          setErrorServerMessage('Неверный логин или пароль');
+        } else {
+          setErrorServerMessage(err.statusText);
+        }
+        setTimeout(() => {
+          setErrorServerMessage('');
+        }, 2000);
+      });
   };
 
   const handleAddMaquette = (name, image) => {
-    console.log("добавили макет");
+    MainApi.addMaquette(name, image)
+      .then((data) => {
+        closePopup();
+        getMaquettes();
+      })
+      .catch((err) => {
+        if (err.status === 401 || err.status === 403) {
+          setErrorServerMessage('Неверный логин или пароль');
+        } else {
+          setErrorServerMessage(err.statusText);
+        }
+        setTimeout(() => {
+          setErrorServerMessage('');
+        }, 2000);
+      });
   };
 
-  const handleEditArticle = (name, image, title, link) => {};
+  const handleEditArticle = (articleId, name, image, title, link) => {
+    MainApi.editArticle(articleId, name, image, title, link)
+      .then(() => {
+        closePopup();
+        getArticles();
+      })
+      .catch((err) => {
+        if (err.status === 401 || err.status === 403) {
+          setErrorServerMessage('Неверный логин или пароль');
+        } else {
+          setErrorServerMessage(err.statusText);
+        }
+        setTimeout(() => {
+          setErrorServerMessage('');
+        }, 2000);
+      });
+  };
 
   const handleDeleteArticle = (article) => {
-    console.log("прикончим эту статью)");
-    console.log(article);
+    return MainApi.deleteArticles(article._id).then(() => {
+      const newArticlesList = articles.filter((a) => a._id !== article._id);
+      setArticles(newArticlesList);
+    });
   };
 
   const onViewMaquette = (maquette) => {
-    // props.onView(maquette);
     setMaquette(maquette);
-    // console.log(maquette);
     setIsPopupOpenView(true);
   };
 
   const handleDeleteMaquette = (maquette) => {
-    console.log("удаляем макет", maquette);
-    // console.log(maquette);
+    return MainApi.deleteMaquette(maquette._id).then(() => {
+      const newMaquetteList = maquettes.filter((a) => a._id !== maquette._id);
+      setMaquettes(newMaquetteList);
+    });
   };
 
   React.useEffect(() => {
     tokenCheck();
     getAboutInfo();
+    getArticles();
+    getMaquettes();
   }, []);
 
-  React.useEffect(() => {
-    getAboutInfo();
-  }, [handleAbout]);
-
-  // console.log(user);
   return (
-    <div className="App">
+    <div className='App'>
       <Header
         isLoggedIn={isLoggedIn}
         userInfo={userInfo}
@@ -208,6 +266,7 @@ function App() {
       />
       <Articles
         isLoggedIn={isLoggedIn}
+        data={articles}
         openEditArticle={openEditArticle}
         deleteArticle={handleDeleteArticle}
         openAddArticle={openAddArticle}
@@ -217,6 +276,7 @@ function App() {
         onViewMaquette={onViewMaquette}
         onDeleteMaquette={handleDeleteMaquette}
         openAddMaquette={openAddMaquette}
+        maquettes={maquettes}
       />
       <Footer />
       <Login
@@ -245,7 +305,7 @@ function App() {
       <AddArticle
         isPopupOpen={isPopupOpenAddArcticle}
         onClose={closePopup}
-        // article={article}
+        article={article}
         onAddArticle={handleAddArticle}
         onServerErrorMessage={errorServerMessage}
       />
