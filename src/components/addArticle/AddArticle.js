@@ -13,6 +13,7 @@ const AddArticle = ({
   const [image, setImage] = React.useState('');
   const [name, setName] = React.useState('');
   const [title, setTitle] = React.useState('');
+  const [subtitle, setSubTitle] = React.useState('');
   const [link, setLink] = React.useState('');
   const [errMessage, setErrMessage] = React.useState('');
   const [isButtonSaveDisabled, setButtonSaveDisabled] = React.useState(true);
@@ -22,7 +23,7 @@ const AddArticle = ({
     if (!handleValidationLink(image) || !handleValidationLink(link)) {
       setErrMessage('Ссылка неверна');
     } else {
-      onAddArticle(name, title, image, link);
+      onAddArticle(name, title, subtitle, image, link);
       formReset();
       onClose();
       return;
@@ -32,6 +33,7 @@ const AddArticle = ({
   const formReset = () => {
     setName('');
     setTitle('');
+    setSubTitle('');
     setLink('');
     setImage('');
     setErrMessage('');
@@ -50,6 +52,11 @@ const AddArticle = ({
     setTitle(evt.target.value);
     setErrMessage('');
   };
+
+  const handleChangeSubTitle = (evt) => {
+    setSubTitle(evt.target.value);
+    setErrMessage('');
+  };
   const handleChangeLink = (evt) => {
     setLink(evt.target.value);
     setErrMessage('');
@@ -57,7 +64,7 @@ const AddArticle = ({
 
   React.useEffect(() => {
     //устанавливает кнопку сохранить в нужную кондицию при изменении полей ввода
-    if (image && title && link && name) {
+    if (image && title && subtitle && link && name) {
       setButtonSaveDisabled(false);
     } else {
       setButtonSaveDisabled(true);
@@ -66,6 +73,7 @@ const AddArticle = ({
     handleChangeImage,
     handleChangeName,
     handleChangeTitle,
+    handleChangeSubTitle,
     handleChangeLink,
   ]);
 
@@ -100,6 +108,16 @@ const AddArticle = ({
             name='title'
             required
             placeholder='Введите заголовок'
+            className={styles.popup__input}
+          />
+          <label className={styles.popup__label}>Подзаголовок</label>
+          <input
+            type='text'
+            value={subtitle || ''}
+            onChange={handleChangeSubTitle}
+            name='subtitle'
+            required
+            placeholder='Введите подзаголовок'
             className={styles.popup__input}
           />
           <label className={styles.popup__label}>

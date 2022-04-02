@@ -73,7 +73,7 @@ export const editAboutInfo = (token, title, about1, about2, image) => {
     .then((data) => data);
 };
 
-export const addArticle = async (token, name, title, image, link) => {
+export const addArticle = async (token, name, title, subtitle, image, link) => {
   const res = await fetch(`${BASE_URL}/mvbarticles`, {
     method: 'POST',
     headers: {
@@ -84,6 +84,7 @@ export const addArticle = async (token, name, title, image, link) => {
     body: JSON.stringify({
       name,
       title,
+      subtitle,
       image,
       link,
     }),
@@ -105,7 +106,7 @@ export const getArticles = (token) => {
     .then((data) => data);
 };
 
-export const editArticle = (articleId, name, title, image, link) => {
+export const editArticle = (articleId, name, title, subtitle, image, link) => {
   return fetch(`${BASE_URL}/mvbarticles`, {
     method: 'PUT',
     headers: {
@@ -116,6 +117,7 @@ export const editArticle = (articleId, name, title, image, link) => {
       articleId,
       name,
       title,
+      subtitle,
       image,
       link,
     }),
