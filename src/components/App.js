@@ -170,9 +170,9 @@ function App() {
       });
   };
 
-  const handleAddArticle = (name, title, image, link) => {
+  const handleAddArticle = (name, title, subtitle, image, link) => {
     let jwt = localStorage.getItem('jwt');
-    MainApi.addArticle(jwt, name, title, image, link)
+    MainApi.addArticle(jwt, name, title, subtitle, image, link)
       .then((data) => {
         closePopup();
         getArticles();
@@ -207,8 +207,8 @@ function App() {
       });
   };
 
-  const handleEditArticle = (articleId, name, image, title, link) => {
-    MainApi.editArticle(articleId, name, image, title, link)
+  const handleEditArticle = (articleId, name, image, title, subtitle, link) => {
+    MainApi.editArticle(articleId, name, image, title, subtitle, link)
       .then(() => {
         closePopup();
         getArticles();
