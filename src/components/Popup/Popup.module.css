@@ -32,6 +32,8 @@
 }
 
 .popup_container {
+  max-width: 85%;
+
   position: relative;
   background-color: #fff;
   border-radius: 10px;
@@ -41,10 +43,7 @@
 
 @media screen and (max-width: 550px) {
   .popup_container {
-    top: 56px;
-    width: 100%;
-    margin-left: -50%;
-    height: 100%;
+    width: 95%;
   }
 }
 
@@ -52,14 +51,14 @@
   width: 40px;
   height: 40px;
   background: none;
-  background-image: url("../../images/close-icon.svg");
+  background-image: url('../../images/close-icon.svg');
   background-size: cover;
   background-repeat: no-repeat;
   border: none;
   padding: 0;
   position: absolute;
-  top: -40.5px;
-  right: -40.5px;
+  top: -30.5px;
+  right: -30.5px;
 }
 
 .popup_close_button:hover {
@@ -71,11 +70,11 @@
   outline: none;
 }
 
-@media screen and (max-width: 550px) {
+/* @media screen and (max-width: 550px) {
   .popup_close_button {
     width: 24px;
     height: 24px;
     top: -40.5px;
     right: 16px;
   }
-}
+} */
