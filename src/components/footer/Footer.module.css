@@ -8,9 +8,22 @@
 }
 
 .footer_paragraph {
-  font-family: "Roboto";
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
+}
+@media screen and (min-width: 538px) and (max-width: 1000px) {
+  .footer_paragraph {
+    font-size: 16px;
+    line-height: 22px;
+  }
+}
+
+@media screen and (max-width: 537px) {
+  .footer_paragraph {
+    font-size: 14px;
+    line-height: 22px;
+  }
 }

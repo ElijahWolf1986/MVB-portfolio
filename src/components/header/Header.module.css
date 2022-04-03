@@ -8,7 +8,7 @@
   flex-direction: column;
   justify-content: center;
   border-radius: 0px;
-  background-image: url("../../images/bg.jpeg");
+  background-image: url('../../images/bg.jpeg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -136,4 +136,49 @@
 .header_logout_button:hover {
   background-color: azure;
   color: red;
+}
+
+@media screen and (min-width: 538px) and (max-width: 760px) {
+  .header_title {
+    font-size: 28px;
+    line-height: 32px;
+  }
+  .header_author_title {
+    font-size: 28px;
+    line-height: 32px;
+  }
+
+  .header_author_paragraph {
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .header_menu_item {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
+@media screen and (max-width: 537px) {
+  .header_title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .header_author_info {
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 80px;
+  }
+  .header_author_title {
+    font-size: 28px;
+    line-height: 32px;
+  }
+
+  .header_author_paragraph {
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .header_menu_item {
+    font-size: 18px;
+    line-height: 22px;
+  }
 }

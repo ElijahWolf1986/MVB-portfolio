@@ -36,7 +36,7 @@
   width: 40px;
   height: 40px;
   background: none;
-  background-image: url("../../images/trash_black_hover.svg");
+  background-image: url('../../images/trash_black_hover.svg');
   background-size: cover;
   background-repeat: no-repeat;
   border: none;
@@ -44,5 +44,26 @@
 }
 
 .maquette_buttonDelete:hover {
-  background-image: url("../../images/trash_red_hover.svg");
+  background-image: url('../../images/trash_red_hover.svg');
+}
+
+@media screen and (min-width: 538px) and (max-width: 1000px) {
+  .maquette_item {
+    max-width: 45%;
+    max-height: 1%;
+    margin: 1% auto;
+  }
+}
+
+@media screen and (max-width: 537px) {
+  .maquette_item {
+    max-width: 45%;
+    max-height: 1%;
+    margin: 1% auto;
+  }
+
+  .maquette_buttonDelete {
+    width: 30px;
+    height: 30px;
+  }
 }

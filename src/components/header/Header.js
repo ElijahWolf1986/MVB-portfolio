@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './Header.module.css';
-import defAbout from '../../services/about.json';
 
 const Header = ({ isLoggedIn, userInfo, openLoginForm, onLogout }) => {
   const [articles, setArticles] = React.useState([]);
@@ -25,7 +24,7 @@ const Header = ({ isLoggedIn, userInfo, openLoginForm, onLogout }) => {
             </button>
           ) : (
             <button className={styles.header_logout_button} onClick={onLogout}>
-              {userInfo ? userInfo.name : defAbout.name}, выйти
+              {userInfo}, выйти
             </button>
           )}
         </div>
