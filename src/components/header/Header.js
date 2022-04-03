@@ -1,5 +1,6 @@
-import React from "react";
-import styles from "./Header.module.css";
+import React from 'react';
+import styles from './Header.module.css';
+import defAbout from '../../services/about.json';
 
 const Header = ({ isLoggedIn, userInfo, openLoginForm, onLogout }) => {
   const [articles, setArticles] = React.useState([]);
@@ -7,8 +8,8 @@ const Header = ({ isLoggedIn, userInfo, openLoginForm, onLogout }) => {
   // const { name } = userInfo;
 
   React.useEffect(() => {
-    setArticles(document.getElementById("articles"));
-    setDesigns(document.getElementById("designs"));
+    setArticles(document.getElementById('articles'));
+    setDesigns(document.getElementById('designs'));
   }, []);
 
   return (
@@ -24,21 +25,21 @@ const Header = ({ isLoggedIn, userInfo, openLoginForm, onLogout }) => {
             </button>
           ) : (
             <button className={styles.header_logout_button} onClick={onLogout}>
-              {userInfo}, выйти
+              {userInfo ? userInfo.name : defAbout.name}, выйти
             </button>
           )}
         </div>
         <div className={styles.header_author_info}>
           <div className={styles.header_author}>
             <div className={styles.header_author_name}>
-              {" "}
+              {' '}
               <h1 className={styles.header_author_title}> Мария Басова</h1>
             </div>
             <div className={styles.header_author_paragraph}>
-              {" "}
+              {' '}
               <p className={styles.header_author_item}>mv.basova@gmail.com </p>
               <p className={styles.header_author_item}>|</p>
-              <p className={styles.header_author_item}>+79654809881</p>{" "}
+              <p className={styles.header_author_item}>+79654809881</p>{' '}
             </div>
           </div>
           <menu className={styles.header_menu}>
@@ -48,8 +49,8 @@ const Header = ({ isLoggedIn, userInfo, openLoginForm, onLogout }) => {
                 onClick={() => {
                   articles &&
                     articles.scrollIntoView({
-                      block: "start",
-                      behavior: "smooth",
+                      block: 'start',
+                      behavior: 'smooth',
                     });
                 }}
               >
@@ -61,12 +62,12 @@ const Header = ({ isLoggedIn, userInfo, openLoginForm, onLogout }) => {
                 onClick={() => {
                   designs &&
                     designs.scrollIntoView({
-                      block: "start",
-                      behavior: "smooth",
+                      block: 'start',
+                      behavior: 'smooth',
                     });
                 }}
               >
-                {" "}
+                {' '}
                 Дизайн
               </li>
             </ul>
